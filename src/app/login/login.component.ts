@@ -33,7 +33,8 @@ export class LoginComponent implements OnInit {
   }
 
 
-  PostData(signupForm: any) {
+  async PostData(signupForm: any) {
+    
     //var server = "http://quitsmoking.srmtechsol.com/public/api";
     //var local = "http://localhost/shantanu/quitsmoking/public/api";
     //var Love = "https://ccnavigator.app/api";
@@ -45,7 +46,7 @@ export class LoginComponent implements OnInit {
     var datas = { "email": this.signupForm.value['email'], "password": this.signupForm.value['password']};
     var data = JSON.stringify(datas);
 
-    axios.post('https://ccnavigator.app/api/reactLogin', data, config)
+    const serv = await axios.post('https://ccnavigator.app/api/reactLogin', data, config)
       .then((response) => {
 
         var message = response.data.message;
@@ -71,10 +72,11 @@ export class LoginComponent implements OnInit {
         this.snackBar.openSnackBar(error,'','red-snackbar');
       })
       .then(function () {
-        this.show=false;
+        
         console.log('always');
 
       });
+      this.show=false;
   }
 
 }

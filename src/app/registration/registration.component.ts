@@ -37,17 +37,15 @@ export class RegistrationComponent implements OnInit {
     this.show=false;
   }
 
-  PostData(signupForm2:any){
+  async PostData(signupForm2:any){
     this.show=true;
     let config = {
       headers: { 'Content-Type': 'application/json','Accept': 'application/json' }
     };
     var datas = this.signupForm2.value;
     var data = JSON.stringify(datas);
-    // console.log(data);
-    //var server = "http://quitsmoking.srmtechsol.com/public/api";
-    //var local = "http://localhost/shantanu/quitsmoking/public/api";
-    axios.post('https://ccnavigator.app/api/angularStore', data, config)
+
+    const serv = await axios.post('https://ccnavigator.app/api/angularStore', data, config)
          .then((responses) => {
           console.log(responses);
           var message = responses.data.message;
@@ -71,9 +69,9 @@ export class RegistrationComponent implements OnInit {
   })
   .then(function () {
     // console.log('always');
-    this.show=false;
+    
   });
-
+  this.show=false;
   }
 
 }
